@@ -89,3 +89,17 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64 sys_slabAlloc(void) {
+    int size;
+    argint(0, &size);
+    void* res = slabAlloc(size);
+    return (int)res; // int ?
+}
+
+uint64 sys_slabFree(void) {
+    int va;
+    argint(0, &va);
+    int res = slabFree((void*)va);
+    return res;
+}

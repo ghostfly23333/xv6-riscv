@@ -681,3 +681,16 @@ procdump(void)
     printf("\n");
   }
 }
+
+void* slabAlloc(int size) {
+  struct proc *p = myproc();
+  int ret_value = slab_alloc(p->pagetable, size);
+  int return_value;
+  return (void*) return_value;
+}
+
+int slabFree(void* va) {
+  struct proc *p = myproc();
+  int res = slab_free(p->pagetable, va);
+  return (void*) res;
+}

@@ -94,7 +94,7 @@ uint64 sys_slabAlloc(void) {
     int size;
     argint(0, &size);
     void* res = slabAlloc(size);
-    return (int)res; // int ?
+    return (int)res; 
 }
 
 uint64 sys_slabFree(void) {

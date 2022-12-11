@@ -174,6 +174,7 @@ uint64          walkaddr(pagetable_t, uint64);
 int             copyout(pagetable_t, uint64, char *, uint64);
 int             copyin(pagetable_t, char *, uint64, uint64);
 int             copyinstr(pagetable_t, char *, uint64, uint64);
+char*           uva2ka(pde_t *, char *);
 
 // plic.c
 void            plicinit(void);
@@ -187,7 +188,7 @@ void            virtio_disk_rw(struct buf *, int);
 void            virtio_disk_intr(void);
 
 // slab.c
-void*           slab_alloc(pagetable_t *, int);
-int             slab_free(pagetable_t *, void *);
+void*           slab_alloc(pde_t *, void *, uint);
+int             slab_free(pde_t *, void *);
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))

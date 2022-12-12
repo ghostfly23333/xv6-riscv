@@ -99,11 +99,6 @@ uint64 sys_sh_var_read()
 
 uint64 sys_sh_var_write()
 {
-  int n;
-  argint(0, &n);
-  sh_var = n;
+  sh_var++;
   return sh_var;
 }
-
-
-

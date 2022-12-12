@@ -24,7 +24,11 @@ int sleep(int);
 int uptime(void);
 
 int sh_var_read(void);
-int sh_var_write(int);
+int sh_var_write(void);
+int sem_create(int);
+int sem_free(int);
+int sem_wait(int);
+int sem_signal(int);
 
 
 // ulib.c

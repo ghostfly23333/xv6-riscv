@@ -108,3 +108,81 @@ pop_off(void)
   if(c->noff == 0 && c->intena)
     intr_on();
 }
+
+int sem_in_use = 0;
+struct sem sems[SEM_MAX_NUM];
+
+void
+initsem(void)
+{
+  int i;
+  for(i = 0; i < SEM_MAX_NUM; i++)
+  {
+    initlock(&(sems[i].lock), "semaphore");
+    sems[i].allocated = 0;
+  }
+}
+
+int
+sys_sem_create(void)
+{
+  int n_sem, i;
+  argint(0, &n_sem);
+  // 扫描sem数组，找到第一个未被分配的sem
+  for(i = 0; i < SEM_MAX_NUM; i++)
+  {
+    acquire(&sems[i].lock);
+    if(sems[i].allocated == 0)
+    {
+      sems[i].allocated = 1;
+      sems[i].resource_count = n_sem;
+      printf("create sem %d\n", i);
+      release(&sems[i].lock);
+      return i;
+    }
+    release(&sems[i].lock);
+  } 
+  // 未找到
+  return -1;
+}
+
+int
+sys_sem_free(void)
+{
+  int id;
+  argint(0, &id);
+  acquire(&sems[id].lock);
+  if(sems[id].allocated == 1 && sems[id].resource_count > 0)
+  {
+    sems[id].allocated = 0;
+    printf("free sem %d\n", id);
+  }
+  release(&sems[id].lock);
+  return 0;
+}
+
+int 
+sys_sem_wait(void)
+{
+  int id;
+  argint(0, &id);
+  acquire(&sems[id].lock);
+  sems[id].resource_count--;
+  if(sems[id].resource_count < 0)
+    sleep(&sems[id], &sems[id].lock);
+  release(&sems[id].lock);
+  return 0;
+}
+
+int 
+sys_sem_signal(void)
+{
+  int id;
+  argint(0, &id);
+  acquire(&sems[id].lock);
+  sems[id].resource_count++;
+  if(sems[id].resource_count <= 0)
+    wakeup_1pro(&sems[id]);
+  release(&sems[id].lock);
+  return 0;
+}

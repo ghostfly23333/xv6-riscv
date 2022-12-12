@@ -4,13 +4,23 @@
 
 int main(int argc, char *argv[])
 {
-    fork();
-    int i, n;
+    int id = sem_create(1);
+    int pid = fork(); 
+    int status, i;   
+
     for(i = 0; i < 100000; i++)
-    {
-        n = sh_var_read();
-        sh_var_write(n + 1);
+    {   
+        sem_wait(id);
+        sh_var_write();
+        sem_signal(id);
     }
-    printf("result: %d\n", sh_var_read());
+    
+    printf("pid%d: result = %d\n", pid, sh_var_read());
+    if(pid > 0)
+    {
+        wait(&status);   
+        sem_free(id);
+    }   
+
     exit(0);
 }

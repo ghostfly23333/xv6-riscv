@@ -28,4 +28,14 @@
 #define SYS_sem_wait      26
 #define SYS_sem_signal    27
 
+#define SYS_procedure0    28
+#define SYS_procedure1    29
+#define SYS_read_cnt      30
+
+#define SYS_var_clear     31
+#define SYS_var_read      32
+#define SYS_var_add       33
+#define SYS_philosopher   34
+
+
 

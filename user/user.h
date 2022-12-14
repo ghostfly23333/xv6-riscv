@@ -24,11 +24,20 @@ int sleep(int);
 int uptime(void);
 
 int sh_var_read(void);
-int sh_var_write(void);
+int sh_var_write(int);
 int sem_create(int);
 int sem_free(int);
 int sem_wait(int);
 int sem_signal(int);
+
+int procedure0(void);
+int procedure1(void);
+int read_cnt(void);
+
+int var_clear(void);
+int var_read(void);
+int var_add(void);
+int philosopher(int);
 
 
 // ulib.c

@@ -6,7 +6,6 @@
 #include "spinlock.h"
 #include "proc.h"
 
-int sh_var = 0;
 
 uint64
 sys_exit(void)
@@ -90,15 +89,4 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
-}
-
-uint64 sys_sh_var_read()
-{
-  return sh_var;
-}
-
-uint64 sys_sh_var_write()
-{
-  sh_var++;
-  return sh_var;
 }

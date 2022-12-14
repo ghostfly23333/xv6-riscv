@@ -43,3 +43,12 @@ entry("sem_create");
 entry("sem_free");
 entry("sem_wait");
 entry("sem_signal");
+
+entry("procedure0");
+entry("procedure1");
+entry("read_cnt");
+
+entry("var_read");
+entry("var_add");
+entry("var_clear");
+entry("philosopher");

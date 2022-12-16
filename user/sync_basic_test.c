@@ -15,18 +15,23 @@ void test1(int m){
 
 // 测试场景1：验证是否实现同步
 void test2(){
+    
+    printf("--access shared variable--\n");
+    printf("8 processes add 1 to the shared variable for 10000 times respectively.\n");
+    printf("If the implementation is correct, then the final value of the shared variable will be 80000.\n\n");
+    
     int i; 
-    int pid;
+    int mutex_out = sem_create(1);
 
     for(i=0;i<3;i++)
-        pid=fork();
+        fork();
 
     for(i=0;i<10000;i++)
         var_add();
 
-    printf("%d :%d\n",pid,var_read());
-
-    sleep(10);
+    sem_wait(mutex_out);
+    printf("Process %d exited. The value of the shared variable is %d.\n", getpid(), var_read());          
+    sem_signal(mutex_out);
 }
 
 int 

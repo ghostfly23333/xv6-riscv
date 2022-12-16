@@ -82,10 +82,15 @@ uint64 philosopher_not(){
             printf("Philosopher %d is eating\n",i);
             // 如果说自己还没放下筷子，同时有其他人放下了筷子说明
             // 发生了冲突
-            if(chopstick[i].val==1||chopstick[(i+1)%8].val==1)
+            if(chopstick[i].val==1)
             {
-                printf("error!!\n\n");                          
+                printf("\nerror: chopstick %d is used by 2 philosophers at the same time\n\n", i);
             }
+            if(chopstick[(i+1)%8].val==1)
+            {
+                printf("\nerror: chopstick %d is used by 2 philosophers at the same time\n\n", (i+1)%8);
+            }
+            
         }
         // 放下筷子
         chopstick[i].val=1;
@@ -108,8 +113,14 @@ uint64 philosopher(){
         WAIT(&(chopstick[(i+1)%8]));
 
         printf("Philosopher %d is eating\n",i);
-        if(chopstick[i].val==1||chopstick[(i+1)%8].val==1)          
-            printf("error!!\n\n");    
+        if(chopstick[i].val==1)
+        {
+            printf("\nerror: chopstick %d is used by 2 philosophers at the same time\n\n", i);
+        }
+        if(chopstick[(i+1)%8].val==1)
+        {
+            printf("\nerror: chopstick %d is used by 2 philosophers at the same time\n\n", (i+1)%8);
+        }
 
         // 放下筷子                                  
         SIGNAL(&(chopstick[(i+1)%8]));

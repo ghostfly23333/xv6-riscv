@@ -26,8 +26,8 @@ void procedure0()
   /*若flag[1]为0，P0就进入临界区；若flag[1]为1，则P0循环等待，只要P1退出临界区，P0即可进入;*/
   while (flag[1] && turn == 1)
   {
-    printf("process 0 is waiting.\n"); 
-  };
+    //printf("process 0 is waiting.\n"); 
+  }
   /*访问临界区*/
   // printf("process 0 is working.\n"); 
   cnt++;
@@ -42,7 +42,7 @@ void procedure1()
   turn = 0;
   while (flag[0] && turn == 0)
   {
-    printf("process 1 is waiting.\n"); 
+    //printf("process 1 is waiting.\n"); 
   }
   // printf("process 1 is working.\n"); 
   cnt++;

@@ -101,6 +101,20 @@ extern uint64 sys_unlink(void);
 extern uint64 sys_link(void);
 extern uint64 sys_mkdir(void);
 extern uint64 sys_close(void);
+extern uint64 sys_sh_var_read(void);
+extern uint64 sys_sh_var_write(void);
+extern uint64 sys_sem_create(void);
+extern uint64 sys_sem_free(void);
+extern uint64 sys_sem_wait(void);
+extern uint64 sys_sem_signal(void);
+extern uint64 procedure0(void);
+extern uint64 procedure1(void);
+extern uint64 peterson(void);
+extern uint64 read_cnt(void);
+extern uint64 sys_var_read(void);
+extern uint64 sys_var_add(void);
+extern uint64 sys_philosopher(void);
+extern uint64 sys_var_clear(void);
 
 // An array mapping syscall numbers from syscall.h
 // to the function that handles the system call.
@@ -126,6 +140,22 @@ static uint64 (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
+
+[SYS_sh_var_read]   sys_sh_var_read,
+[SYS_sh_var_write]  sys_sh_var_write,
+[SYS_sem_create]    sys_sem_create,
+[SYS_sem_free]      sys_sem_free,
+[SYS_sem_wait]      sys_sem_wait,
+[SYS_sem_signal]    sys_sem_signal,
+
+[SYS_procedure0]    procedure0,
+[SYS_procedure1]    procedure1,
+[SYS_read_cnt]      read_cnt,
+
+[SYS_var_clear]     sys_var_clear,
+[SYS_var_read]      sys_var_read,
+[SYS_var_add]       sys_var_add,
+[SYS_philosopher]   sys_philosopher,
 };
 
 void

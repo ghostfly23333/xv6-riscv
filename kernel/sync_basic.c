@@ -17,7 +17,6 @@ struct semphore {
 struct semphore var_lock;
 struct semphore chopstick[8];
 struct semphore ph_num;
-int reader_count = 0;
 int var=0;
 
 void init_semphores()
@@ -26,7 +25,7 @@ void init_semphores()
     var_lock.val = 1;
 
     for(int i=0;i<8;i++)
-    {
+    {  
         initlock(&(chopstick[i].lk), "chopstick");
         chopstick[i].val = 1;
     }

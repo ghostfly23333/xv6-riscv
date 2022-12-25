@@ -20,12 +20,12 @@ void test2(){
     printf("8 processes add 1 to the shared variable for 10000 times respectively.\n");
     printf("If the implementation is correct, then the final value of the shared variable will be 80000.\n\n");
     
-    int i; 
+    int i,pid; 
     int mutex_out = sem_create(1);
 
     for(i=0;i<3;i++)
-        fork();
-
+        pid=fork();
+    if(pid!=0)  wait(0);
     for(i=0;i<10000;i++)
         var_add();
 

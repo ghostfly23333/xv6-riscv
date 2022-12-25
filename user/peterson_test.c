@@ -15,7 +15,8 @@ int main(int argc, char *argv[])
         if(pid > 0) procedure0();
         else procedure1();       
     }
-    if(pid > 0) wait(&status);  
-    printf("Process %d exited. The value of the shared variable is %d.\n", pid, read_cnt());          
+      
+    if(pid > 0) wait(&status);       
+    printf("Process %d exited. The value of the shared variable is %d.\n", pid, read_cnt()); 
     exit(0);
 }
